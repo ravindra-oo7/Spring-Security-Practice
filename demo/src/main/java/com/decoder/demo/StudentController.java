@@ -16,7 +16,7 @@ public class StudentController {
 	
 	private List<Student> students = new ArrayList<Student>(
 										List.of(new Student(1,"Ravindra",86),
-												new Student(2,"Mayur",88), 
+							 					new Student(2,"Mayur",88), 
 												new Student(3,"Ashutosh",77)
 												)			
 									);
