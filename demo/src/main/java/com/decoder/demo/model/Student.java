@@ -1,4 +1,4 @@
-package com.decoder.demo;
+package com.decoder.demo.model;
 
 
 
