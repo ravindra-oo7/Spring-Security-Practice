@@ -32,11 +32,11 @@ public class UserService {
 
 	public String login(Users user) 
 	{
-				Authentication authentication = 
+		Authentication authentication = 
 				authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 		
 		if(authentication.isAuthenticated())
-			return jwtService.generateToken();
+			return jwtService.generateToken(user.getUsername());
 		else
 			return "Fail to Login";
 	}
