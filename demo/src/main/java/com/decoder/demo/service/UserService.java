@@ -20,7 +20,7 @@ public class UserService {
 	private JWTService jwtService;
 	
 	@Autowired
-	AuthenticationManager authManager;
+	private AuthenticationManager authManager;
 	
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 	

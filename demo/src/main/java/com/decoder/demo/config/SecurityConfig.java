@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity //Bypass default Security implementation
@@ -25,6 +26,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private JwtFilter jwtFilter;
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception 
@@ -36,9 +40,11 @@ public class SecurityConfig {
 							.anyRequest().authenticated())
 //					.formLogin(Customizer.withDefaults()) //give basic form login page from Spring Security
 					.httpBasic(Customizer.withDefaults()) // Enable Rest's to access this resource eg.Postman 
-					.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+					.sessionManagement(session -> 
+						session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 					// Above line makes Appliaction Stateless
-					// with each request we will get new session ID 
+					// with each request we will get new session ID
+					.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();
 		
 	}
